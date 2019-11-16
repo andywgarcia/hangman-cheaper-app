@@ -1,1 +1,1 @@
-# hangman-cheaper-app
+# hangman-cheater-app
