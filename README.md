@@ -1,5 +1,7 @@
 # Cheating Hangman App
 
+## Problem Description
+
 You are probably familiar with the game [Hangman](<https://en.wikipedia.org/wiki/Hangman_(game)>), which is a pretty simple two-player game. One player chooses a secret word and writes out blanks for each letter. The other player guesses letters from A-Z one at a time. If the letter guessed is in the word, the first player writes the letter in the appropriate blank (or blanks), but if the letter is _not_ in the word, the second player is charged with a miss. If the second player can guess every letter in the word before reaching a certain number of misses (frequently six or so), they win, but should they run out of chances, they lose and the secret word is revealed.
 
 Hangman can be a fun game to play with a computer and Hangman programs have been developed [many times](https://github.com/weiss/original-bsd/tree/master/games/hangman). Usually the computer takes on the role of the first player, choosing a word, and the user takes the guessing role. Given that most of the first player's role is rote, it's pretty straightforward to write the game.
@@ -20,3 +22,7 @@ We'll be looking to see if we understand your code, if it shows good development
 1. Run `npm install`
 1. Run `npm start`
 1. If the page loads successfully without alerts and the game has a word ready for you, then it is ready to be played
+
+## Notes
+
+- This is is not a standalone solution. It requires connection to the api that was also submitted
