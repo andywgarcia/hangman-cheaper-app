@@ -6,6 +6,7 @@ import TotalGuesses from "./TotalGuesses";
 import Guesses from "./Guesses";
 import PossibleWords from "./PossibleWords";
 import Winner from "./Winner";
+import Loser from "./Loser";
 
 import HangmanClient from "../util/hangmanClient";
 
@@ -73,19 +74,8 @@ function Hangman() {
       />
     );
   }
-  if (guessedLetters.length >= MAX_GUESSES) {
-    return (
-      <div>
-        <h1>You Lose. Answer was {answer}</h1>
-        <button
-          onClick={() => {
-            reset();
-          }}
-        >
-          Restart
-        </button>
-      </div>
-    );
+  if (guessedLetters.length >= MAX_GUESSES && !isTestMode) {
+    return <Loser winningWord={answer} onReset={reset} />;
   }
 
   return (

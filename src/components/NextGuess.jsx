@@ -7,8 +7,12 @@ function NextGuess({ onGuess, alreadyGuessedCharacters }) {
       alert("Enter exactly 1 character");
       return;
     }
-    if (alreadyGuessedCharacters.includes(guess)) {
+    if (
+      alreadyGuessedCharacters.filter(({ letter }) => guess === letter).length >
+      0
+    ) {
       alert("You have already guessed that letter");
+      setGuess("");
       return;
     }
     onGuess(guess);
