@@ -1,16 +1,16 @@
 import React from "react";
 
-function Winner({ turnsTaken, winningWord, onReset }) {
+function Winner({ turnsTaken, winningWord, onRestart }) {
   return (
     <div>
       <h1>You Won in {turnsTaken} turns!</h1>
       <h2>Winning Word: {winningWord}</h2>
-      <button onClick={onReset}>Reset</button>
+      <button onClick={onRestart}>Reset</button>
     </div>
   );
 }
 
 Winner.defaultProps = {
-  onReset: () => {}
+  onRestart: () => {}
 };
 export default Winner;

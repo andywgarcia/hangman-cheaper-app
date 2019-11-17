@@ -9,6 +9,8 @@ import Winner from "./Winner";
 import Loser from "./Loser";
 
 import HangmanClient from "../util/hangmanClient";
+import TestModeButton from "./buttons/TestModeButton";
+import RestartButton from "./buttons/RestartButton";
 
 const GenerateInitialHangmanWord = answer => {
   return answer.replace(/[a-z]/gi, "?");
@@ -19,14 +21,12 @@ const MAX_GUESSES = 10;
 function Hangman() {
   const [hangmanWord, setHangmanWord] = useState(null);
   const [answer, setAnswer] = useState(null);
-
   const initializeWord = () => {
     HangmanClient.GenerateInitialWord().then(initialWord => {
       setAnswer(initialWord);
       setHangmanWord(GenerateInitialHangmanWord(initialWord));
     });
   };
-
   useEffect(() => {
     initializeWord();
   }, []);
@@ -55,7 +55,7 @@ function Hangman() {
 
   const [isTestMode, setIsTestMode] = useState(false);
 
-  const reset = () => {
+  const restart = () => {
     initializeWord();
     setPossibleWords([]);
     setGuessedLetters([]);
@@ -70,12 +70,12 @@ function Hangman() {
       <Winner
         turnsTaken={guessedLetters.length}
         winningWord={answer}
-        onReset={reset}
+        onRestart={restart}
       />
     );
   }
   if (guessedLetters.length >= MAX_GUESSES && !isTestMode) {
-    return <Loser winningWord={answer} onReset={reset} />;
+    return <Loser winningWord={answer} onRestart={restart} />;
   }
 
   return (
@@ -93,20 +93,16 @@ function Hangman() {
         numGuesses={guessedLetters.length}
         maxGuesses={MAX_GUESSES}
       ></TotalGuesses>
-      <button
-        onClick={() => {
+      <TestModeButton
+        onToggleTestMode={() => {
           setIsTestMode(!isTestMode);
         }}
-      >
-        Toggle Test Mode
-      </button>
-      <button
-        onClick={() => {
-          reset();
+      />
+      <RestartButton
+        onRestart={() => {
+          restart();
         }}
-      >
-        Restart
-      </button>
+      />
       {isTestMode && (
         <React.Fragment>
           <hr />
