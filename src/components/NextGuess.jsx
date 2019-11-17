@@ -23,6 +23,12 @@ function NextGuess({ onGuess, alreadyGuessedCharacters }) {
           onChange={event => {
             setGuess(event.target.value);
           }}
+          onKeyPress={event => {
+            if (event.key === "Enter") {
+              setGuess(event.target.value);
+              onSubmit();
+            }
+          }}
           value={guess}
         ></input>
         <button onClick={onSubmit}>Guess</button>
