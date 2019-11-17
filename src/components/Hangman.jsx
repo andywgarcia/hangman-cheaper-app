@@ -13,15 +13,21 @@ const GenerateInitialHangmanWord = answer => {
   return answer.replace(/[a-z]/gi, "?");
 };
 
+const MAX_GUESSES = 3;
+
 function Hangman() {
   const [hangmanWord, setHangmanWord] = useState(null);
   const [answer, setAnswer] = useState(null);
-  useEffect(() => {
+
+  const initializeWord = () => {
     HangmanClient.GenerateInitialWord().then(initialWord => {
-      console.log("Initial Word: ", initialWord);
       setAnswer(initialWord);
       setHangmanWord(GenerateInitialHangmanWord(initialWord));
     });
+  };
+
+  useEffect(() => {
+    initializeWord();
   }, []);
 
   const [guessedLetters, setGuessedLetters] = useState([]);
@@ -45,9 +51,42 @@ function Hangman() {
     setGuessedLetters([...guessedLetters, letter]);
   };
 
-  if (hangmanWord !== null && answer !== null && hangmanWord === answer) {
-    return <Winner turnsTaken={guessedLetters.length} winningWord={answer} />;
+  const [isTestMode, setIsTestMode] = useState(false);
+
+  const reset = () => {
+    initializeWord();
+    setPossibleWords([]);
+    setGuessedLetters([]);
+  };
+
+  if (hangmanWord === null || answer === null) {
+    return <h1>Loading...</h1>;
   }
+
+  if (hangmanWord !== null && answer !== null && hangmanWord === answer) {
+    return (
+      <Winner
+        turnsTaken={guessedLetters.length}
+        winningWord={answer}
+        onReset={reset}
+      />
+    );
+  }
+  if (guessedLetters.length >= MAX_GUESSES) {
+    return (
+      <div>
+        <h1>You Lose. Answer was {answer}</h1>
+        <button
+          onClick={() => {
+            reset();
+          }}
+        >
+          Restart
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div>
       <HangmanWord word={hangmanWord}></HangmanWord>
@@ -59,10 +98,31 @@ function Hangman() {
         onGuess={submitGuess}
         alreadyGuessedCharacters={guessedLetters}
       ></NextGuess>
-      <TotalGuesses></TotalGuesses>
-      <hr />
-      <ActualAnswer word={answer}></ActualAnswer>
-      <PossibleWords possibleWords={possibleWords} />
+      <TotalGuesses
+        numGuesses={guessedLetters.length}
+        maxGuesses={MAX_GUESSES}
+      ></TotalGuesses>
+      <button
+        onClick={() => {
+          setIsTestMode(!isTestMode);
+        }}
+      >
+        Toggle Test Mode
+      </button>
+      <button
+        onClick={() => {
+          reset();
+        }}
+      >
+        Restart
+      </button>
+      {isTestMode && (
+        <React.Fragment>
+          <hr />
+          <ActualAnswer word={answer}></ActualAnswer>
+          <PossibleWords possibleWords={possibleWords} />
+        </React.Fragment>
+      )}
     </div>
   );
 }

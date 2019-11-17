@@ -6,7 +6,6 @@ export default {
       "http://localhost:3001/generateInitialWord",
       {}
     );
-    console.log(response);
     if (response.status !== 200) {
       alert("Cannot connect to the local server on port 3001");
       return null;
@@ -25,10 +24,9 @@ export default {
       hangmanString: currentHangmentString,
       guessedLetter: guessedLetter,
       answer: answer,
-      excludedLetters: alreadyGuessedLetters,
+      alreadyGuessedLetters: alreadyGuessedLetters,
       words: possibleWords.length > 0 ? possibleWords : null
     });
-    console.log(response);
     if (response.status !== 200) {
       alert("Cannot connect to the local server on port 3001");
       return null;

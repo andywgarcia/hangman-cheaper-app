@@ -1,9 +1,11 @@
 import React from "react";
 
-function TotalGuesses() {
+function TotalGuesses({ numGuesses, maxGuesses }) {
   return (
     <div>
-      <h1>Hello World</h1>
+      <h1>
+        Total Guesses: {numGuesses}/{maxGuesses}
+      </h1>
     </div>
   );
 }

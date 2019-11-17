@@ -3,7 +3,6 @@ import React, { useState } from "react";
 function NextGuess({ onGuess, alreadyGuessedCharacters }) {
   const [guess, setGuess] = useState("");
   const onSubmit = () => {
-    console.log("Input: ", guess);
     if (guess.length !== 1) {
       alert("Enter exactly 1 character");
       return;
@@ -13,6 +12,7 @@ function NextGuess({ onGuess, alreadyGuessedCharacters }) {
       return;
     }
     onGuess(guess);
+    setGuess("");
   };
 
   return (
@@ -21,9 +21,9 @@ function NextGuess({ onGuess, alreadyGuessedCharacters }) {
         Next Guess:{" "}
         <input
           onChange={event => {
-            console.log("Changed: ", event.target.value);
             setGuess(event.target.value);
           }}
+          value={guess}
         ></input>
         <button onClick={onSubmit}>Guess</button>
       </h1>
