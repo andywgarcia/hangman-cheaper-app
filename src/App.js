@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 
-import Hangman from "./components/Hangman";
+import Hangman from "./components";
 class App extends Component {
+  componentDidMount() {
+    document.title = "Hangman";
+  }
+
   render() {
     return (
       <div className="App">

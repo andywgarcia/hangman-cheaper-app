@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function NextGuess({ onGuess, alreadyGuessedCharacters }) {
+function GuessInput({ onGuess, alreadyGuessedCharacters }) {
   const [guess, setGuess] = useState("");
   const onSubmit = () => {
     if (guess.length !== 1) {
@@ -41,9 +41,9 @@ function NextGuess({ onGuess, alreadyGuessedCharacters }) {
   );
 }
 
-NextGuess.defaultProps = {
+GuessInput.defaultProps = {
   onGuess: () => {},
   alreadyGuessedCharacters: []
 };
 
-export default NextGuess;
+export default GuessInput;

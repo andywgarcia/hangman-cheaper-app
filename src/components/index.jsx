@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
-import ActualAnswer from "./ActualAnswer";
+import ActualAnswer from "./testMode/ActualAnswer";
 import HangmanWord from "./HangmanWord";
-import NextGuess from "./NextGuess";
+import NextGuess from "./GuessInput";
 import TotalGuesses from "./TotalGuesses";
 import Guesses from "./Guesses";
-import PossibleWords from "./PossibleWords";
+import PossibleWords from "./testMode/PossibleWords";
 import Winner from "./Winner";
 import Loser from "./Loser";
 
 import HangmanClient from "../util/hangmanClient";
 import TestModeButton from "./buttons/TestModeButton";
 import RestartButton from "./buttons/RestartButton";
+import TestModeSection from "./testMode";
 
 const GenerateInitialHangmanWord = answer => {
   return answer.replace(/[a-z]/gi, "?");
@@ -103,13 +104,11 @@ function Hangman() {
           restart();
         }}
       />
-      {isTestMode && (
-        <React.Fragment>
-          <hr />
-          <ActualAnswer word={answer}></ActualAnswer>
-          <PossibleWords possibleWords={possibleWords} />
-        </React.Fragment>
-      )}
+      <TestModeSection
+        isShown={isTestMode}
+        answer={answer}
+        possibleWords={possibleWords}
+      />
     </div>
   );
 }
