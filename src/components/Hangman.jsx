@@ -13,7 +13,7 @@ const GenerateInitialHangmanWord = answer => {
   return answer.replace(/[a-z]/gi, "?");
 };
 
-const MAX_GUESSES = 3;
+const MAX_GUESSES = 10;
 
 function Hangman() {
   const [hangmanWord, setHangmanWord] = useState(null);
@@ -37,18 +37,19 @@ function Hangman() {
       hangmanWord,
       letter,
       answer,
-      guessedLetters,
+      guessedLetters.map(({ letter }) => letter),
       possibleWords
     );
     if (result.isLetterSuccessful) {
-      alert("Correct!");
       setHangmanWord(result.hangmanString);
     } else {
-      alert("Try again!");
       setAnswer(result.possibleWords[0]);
     }
     setPossibleWords(result.possibleWords);
-    setGuessedLetters([...guessedLetters, letter]);
+    setGuessedLetters([
+      ...guessedLetters,
+      { letter, isLetterSuccessful: result.isLetterSuccessful }
+    ]);
   };
 
   const [isTestMode, setIsTestMode] = useState(false);
