@@ -26,3 +26,5 @@ We'll be looking to see if we understand your code, if it shows good development
 ## Notes
 
 - This is is not a standalone solution. It requires connection to the api that was also submitted
+- Test mode will disable the ability to lose so that you can actually get to the end
+- Test mode will allow you to see how the program is cheating, and how to beat it
