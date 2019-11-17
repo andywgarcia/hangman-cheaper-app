@@ -21,7 +21,7 @@ function GuessInput({ onGuess, alreadyGuessedCharacters }) {
 
   return (
     <div>
-      <h1>
+      <h2>
         Next Guess:{" "}
         <input
           onChange={event => {
@@ -34,9 +34,11 @@ function GuessInput({ onGuess, alreadyGuessedCharacters }) {
             }
           }}
           value={guess}
+          maxLength={1}
+          placeholder="a"
         ></input>
         <button onClick={onSubmit}>Guess</button>
-      </h1>
+      </h2>
     </div>
   );
 }

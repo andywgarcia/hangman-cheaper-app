@@ -1,5 +1,5 @@
 import React from "react";
-import RestartButton from "./buttons/RestartButton";
+import RestartButton from "../buttons/RestartButton";
 
 function Winner({ winningWord, onRestart }) {
   return (

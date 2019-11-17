@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import ActualAnswer from "./testMode/ActualAnswer";
 import HangmanWord from "./HangmanWord";
 import NextGuess from "./GuessInput";
 import TotalGuesses from "./TotalGuesses";
 import Guesses from "./Guesses";
-import PossibleWords from "./testMode/PossibleWords";
-import Winner from "./Winner";
-import Loser from "./Loser";
+import Winner from "./results/Winner";
+import Loser from "./results/Loser";
 
 import HangmanClient from "../util/hangmanClient";
 import TestModeButton from "./buttons/TestModeButton";
